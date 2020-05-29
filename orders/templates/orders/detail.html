@@ -1,0 +1,37 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+    item.name
+{% endblock %}
+
+{% block body %}
+
+    {% if item.category == "Pz" %} 
+    <h1>{{ item.name }}</h1>
+    <p>All the pizzas are made with our own dough,  
+    a special sauce recipy from local grown tomatoes, and mozzarela cheese. </p>
+    <hr>
+    <h3>Price: ${{ item.price }}</h3>
+    <h3>Additional Toppings: {{ item.toppings_extra|default_if_none:"Special" }}</h3>
+    {% if item.toppings_extra == None %}
+    <p>This special will include 6 choices of toppings of your own 
+        OR our Special Pinnochio Pizza.</p>
+    {% endif %}
+    <hr>
+    <h4>Choose From:</h4>
+    <ul>
+        {% for item in other_toppings %}
+            <li>{{ item.name }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h1>{{ item.name }}</h1>
+    <br>
+    <h3>Price: ${{ item.price }}</h3>
+    {% endif %}
+    <br>
+    <a href="{% url 'orders:index' %}" class="btn btn-warning">
+        Back to Site
+    </a>
+
+{% endblock %}

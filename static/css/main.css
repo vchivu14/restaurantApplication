@@ -1,0 +1,12 @@
+body {
+    background-color: blanchedalmond;
+}
+
+.navbar-nav > .active > a {
+color: aqua;
+background-color: chartreuse;    
+}
+
+.nav-item > a:hover {
+color: crimson;
+}

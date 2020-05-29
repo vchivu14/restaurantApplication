@@ -1,0 +1,47 @@
+{% extends 'cart/base.html' %}
+
+{% block title %}
+Checkout
+{% endblock title %}
+
+{% block content %}
+
+<h1>Checkout</h1>
+
+<div class="container">
+    <section>
+        <div class="row" id="tablerow">
+            <div class="col-md-8 col-xs-12">
+                <table class="table">
+                    <tr>
+                        <td>
+                            <h4>Order Summary</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% for item in order.get_cart_items %}
+                    <tr>
+                        <td>{{ item }}</td>
+                        <td>${{ item.item.price }}</td>
+                    </tr>
+                    {% endfor %}
+                    </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Order Total</strong> </td>
+                        <td><strong>${{ order.get_cart_total }}</strong></td>
+                    </tr>
+                </table>
+                    <button onclick="" class="btn btn-warning" style="width: 100%;">
+                        Checkout with a credit card
+                    </button>
+            </div>
+        </div>
+        <br>
+        <a href="{% url 'orders:index' %}" class="btn btn-info">
+            Back to Site
+        </a>
+    </section>
+
+{% endblock content%}

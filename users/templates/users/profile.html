@@ -1,0 +1,21 @@
+{% extends "users/base.html" %}
+
+{% block body %}
+
+{% if messages %}
+{% for message in messages %}
+    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+
+<h1>Hello, {{ user.first_name }} {{ user.last_name }}</h1>
+<ul>
+    <li>Currently logged in as: {{ user.username }}</li>
+    <li>Email: {{ user.email }}</li>
+</ul>
+<!-- <a href="{% url 'users:logout' %}">Logout</a> -->
+<a class="ml-2" href="{% url 'users:logout' %}">Logout</a>
+<br>
+<a class="ml-2" href="{% url 'orders:index' %}">Go to Site</a>
+<!-- <a href="{% url 'orders:index' %}">Go to Site</a> -->
+{% endblock %}

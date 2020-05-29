@@ -1,0 +1,137 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+    Menu
+{% endblock %}
+
+{% block body %}
+
+    {% if user.is_authenticated %}
+        <h2>Hello, {{ user.first_name }} {{ user.last_name }}</h2>
+        <!-- <ul>
+            <li>Currently logged in as: {{ user }}</li>
+            <li>Email: {{ user.email }}</li>
+        </ul> -->
+        <form action="{% url 'users:logout' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" type="Logout" value="Logout">
+        </form>
+    {% else %}
+        <h3>Sign in first to start placing orders</h3>
+        <a href="{% url 'users:login' %}" class="btn btn-primary">
+            Go to Login
+        </a>
+    {% endif %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <hr>
+    <h2>Pizzas</h2>
+    <h4 id="regpizzas">Regular Pizzas</h4>
+    {% for item in reg_pizzas %}
+        <li>
+            <a href="{% url 'orders:detail' item.id %}">
+            {{ item.name }}
+            </a>
+            -- Size: {{ item.item_size }} 
+            -- Toppings Extra: {{ item.toppings_extra|default_if_none:"Special" }} 
+            -- Price: {{ item.price }}
+            {% if user.is_authenticated %}
+            <a href="{% url 'cart:add_to_cart' item.id %}" class="btn btn-warning">
+                Add to Cart
+            </a>
+            {% endif %}
+        </li>
+        <br>
+    {% endfor %}
+    <h4 id="sicpizza">Sicilian Pizzas</h4>
+    {% for item in sicilian_pizzas %}
+        <li>
+            <a href="{% url 'orders:detail' item.id %}">
+            {{ item.name }}
+            </a>
+            -- Size: {{ item.item_size }} 
+            -- Toppings Extra: {{ item.toppings_extra|default_if_none:"Special" }} 
+            -- Price: {{ item.price }}
+            {% if user.is_authenticated %}
+            <a href="{% url 'cart:add_to_cart' item.id %}" class="btn btn-warning">
+                Add to Cart
+            </a>
+            {% endif %}
+        </li>
+        <br>
+    {% endfor %}
+    <h2>Subs</h2>
+    {% for item in subs %}
+        <li>
+            <a href="{% url 'orders:detail' item.id %}">
+            {{ item.name }}
+            </a>
+            -- Size: {{ item.item_size }} 
+            -- Price: {{ item.price }}
+            {% if user.is_authenticated %}
+            <a href="{% url 'cart:add_to_cart' item.id %}" class="btn btn-warning">
+                Add to Cart
+            </a>
+            {% endif %}
+        </li>
+        <br>
+    {% endfor %}
+    <h2>Pastas</h2>
+    {% for item in pastas %}
+        <li>
+            <a href="{% url 'orders:detail' item.id %}">
+            {{ item.name }}
+            </a>
+            -- Price: {{ item.price }}
+            {% if user.is_authenticated %}
+            <a href="{% url 'cart:add_to_cart' item.id %}" class="btn btn-warning">
+                Add to Cart
+            </a>
+            {% endif %}
+        </li>
+        <br>
+    {% endfor %}
+    <h2>Salads</h2>
+    {% for item in salads %}
+        <li>
+            <a href="{% url 'orders:detail' item.id %}">
+            {{ item.name }}
+            </a>
+            -- Price: {{ item.price }}
+            {% if user.is_authenticated %}
+            <a href="{% url 'cart:add_to_cart' item.id %}" class="btn btn-warning">
+                Add to Cart
+            </a>
+            {% endif %}
+        </li>
+        <br>
+    {% endfor %}
+    <h2>Dinner Platters</h2>
+    {% for item in platters %}
+        <li>
+            <a href="{% url 'orders:detail' item.id %}">
+            {{ item.name }}
+            </a>
+            -- Size: {{ item.item_size }} 
+            -- Price: {{ item.price }}
+            {% if user.is_authenticated %}
+            <a href="{% url 'cart:add_to_cart' item.id %}" class="btn btn-warning">
+                Add to Cart
+            </a>
+            {% endif %}
+        </li>
+        <br>
+    {% endfor %}
+    <h3>Toppings</h3>
+    {% for item in toppings %}
+        <li>
+            {{ item.name }} -- {{ item.price }}
+        </li>
+    {% endfor %}
+
+{% endblock %}
