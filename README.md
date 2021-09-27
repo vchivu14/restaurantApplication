@@ -1,5 +1,5 @@
 Project for Course:
-HarvardX CS50W
+HarvardX CS50W 
 Web Programming with Python and JavaScript
 
 <h2>Restaurant application</h2>
