@@ -1,7 +1,7 @@
 Project for Course:
 HarvardX CS50W 
 Web Programming with Python and JavaScript
-
+ 
 <h2>Restaurant application</h2>
 <h4>Python3 and Django</h4>
 <p>Steps:</p>
